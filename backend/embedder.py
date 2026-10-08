@@ -10,6 +10,7 @@ multilingual-e5 は「検索文」と「検索される文書」で先頭に付�
 """
 
 import os
+import threading
 
 # モデルはローカルのフォルダから読むので、Hugging Face への通信を一切させない
 os.environ.setdefault("HF_HUB_OFFLINE", "1")
@@ -22,6 +23,8 @@ from sentence_transformers import SentenceTransformer
 from backend.config import MODEL_DIR, MODEL_NAME
 
 _model = None
+# Web サーバーは複数のリクエストを並行に処理するので、モデルの計算は1つずつ通す
+_lock = threading.Lock()
 
 
 def _device():
@@ -45,7 +48,8 @@ def get_model():
 def _embed(text, prefix, log=True):
     model = get_model()
     # normalize_embeddings=True で長さ1のベクトルにする（類似度計算が内積だけで済む）
-    vector = model.encode(prefix + text, normalize_embeddings=True).astype(np.float32)
+    with _lock:
+        vector = model.encode(prefix + text, normalize_embeddings=True).astype(np.float32)
     if log:
         head = ", ".join(f"{v:.4f}" for v in vector[:4])
         print(
