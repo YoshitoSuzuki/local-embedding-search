@@ -1,0 +1,14 @@
+{
+  // ブラウザ側（frontend/src/app.ts）を frontend/dist/app.js に変換する設定
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "esnext",
+    "lib": ["es2022", "dom", "dom.iterable"],
+    "types": [],
+    "strict": true,
+    "rootDir": "src",
+    "outDir": "dist",
+    "skipLibCheck": true
+  },
+  "include": ["src"]
+}
