@@ -1,0 +1,14 @@
+# Python 仮想環境
+.venv/
+__pycache__/
+*.pyc
+
+# ダウンロードしたEmbeddingモデル本体（数百MB〜1GB。各自 scripts/download_model.py で取得）
+models/*
+!models/.gitkeep
+
+# 生成されるデータベース（scripts/build_index.py で再生成できる）
+data/*.db
+
+# macOS
+.DS_Store
