@@ -1,0 +1,27 @@
+{
+  "name": "local-semantic-search",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "download-model": "node scripts/download-model.ts",
+    "try-embedding": "node scripts/try-embedding.ts",
+    "build-index": "node scripts/build-index.ts",
+    "search": "node scripts/search-cli.ts",
+    "build": "tsc -p frontend",
+    "typecheck": "tsc -p . && tsc -p frontend --noEmit",
+    "start": "npm run build && node backend/server.ts"
+  },
+  "dependencies": {
+    "@hono/node-server": "^2.1.4",
+    "@huggingface/transformers": "^4.3.1",
+    "hono": "^4.13.13"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "typescript": "^7.0.2"
+  }
+}

@@ -1,13 +1,14 @@
-# Python 仮想環境
-.venv/
-__pycache__/
-*.pyc
+# Node.js のパッケージ（npm install で復元できる）
+node_modules/
 
-# ダウンロードしたEmbeddingモデル本体（数百MB〜1GB。各自 scripts/download_model.py で取得）
+# frontend/src/app.ts から生成する JS（npm run build で再生成できる）
+frontend/dist/
+
+# ダウンロードした Embedding モデル本体（各自 npm run download-model で取得）
 models/*
 !models/.gitkeep
 
-# 生成されるデータベース（scripts/build_index.py で再生成できる）
+# 生成されるデータベース（npm run build-index で再生成できる）
 data/*.db
 
 # macOS

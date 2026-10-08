@@ -113,6 +113,7 @@
             <div class="kv"><span>型</span><span id="vd-type" class="muted"></span></div>
             <div class="kv"><span>サイズ</span><span id="vd-bytes" class="muted"></span></div>
             <div class="kv"><span>ノルム</span><span id="vd-norm" class="muted"></span></div>
+            <div class="kv"><span>モデル</span><span id="vd-model" class="muted"></span></div>
             <div id="vd-values" class="vector-grid"></div>
             <button id="vd-toggle" type="button" class="row-button">
               <span id="vd-toggle-label"></span>
@@ -125,12 +126,13 @@
   id          INTEGER PRIMARY KEY,
   title       TEXT NOT NULL UNIQUE,
   description TEXT NOT NULL,
+  model       TEXT NOT NULL,
   embedding   BLOB NOT NULL
 );</pre></div>
       </aside>
     </div>
   </main>
 
-  <script src="/app.js"></script>
+  <script src="/dist/app.js"></script>
 </body>
 </html>

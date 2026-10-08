@@ -19,6 +19,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 
 body {
   margin: 0;
@@ -152,11 +153,12 @@ button, input, textarea { font: inherit; color: inherit; }
 .db-table th:first-child, .db-table td:first-child { padding-left: 20px; }
 .db-table td { padding: 12px; vertical-align: top; border-top: 1px solid var(--line); }
 .db-table td.id { color: var(--muted); font-variant-numeric: tabular-nums; }
-.db-table td.desc { color: var(--text-2); }
+.db-table td.title { min-width: 150px; }
+.db-table td.desc { color: var(--text-2); min-width: 260px; }
 .db-table td.vec { font-family: var(--mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
 .db-table td.ops { padding: 6px 16px 6px 8px; text-align: right; }
 .db-table tr.selected { background: var(--row-selected); }
-.link-button { padding: 0; border: 0; background: none; font-weight: 600; color: var(--link); cursor: pointer; text-align: left; min-height: 24px; white-space: nowrap; }
+.link-button { padding: 0; border: 0; background: none; font-weight: 600; color: var(--link); cursor: pointer; text-align: left; min-height: 24px; }
 .icon-button {
   width: 40px; height: 40px; border: 0; border-radius: 20px; background: transparent;
   color: var(--red); cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
@@ -167,7 +169,7 @@ button, input, textarea { font: inherit; color: inherit; }
 .vector-grid div { padding: 6px 4px; background: var(--bg); border-radius: 8px; font-family: var(--mono); font-size: 12px; text-align: center; }
 .row-button {
   width: 100%; min-height: 48px; display: flex; align-items: center; justify-content: space-between;
-  padding: 0 20px; border: 0; background: var(--card); color: var(--link); font-size: 15px; cursor: pointer;
+  padding: 0 20px; border: 0; background: var(--card); color: var(--link); font-size: 15px; cursor: pointer; text-decoration: none;
 }
 .row-button.open svg { transform: rotate(90deg); }
 
