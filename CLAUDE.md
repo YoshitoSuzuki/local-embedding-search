@@ -16,5 +16,5 @@ Embedding の仕組みを学ぶためのローカル意味検索のプロトタ�
 - `main` / `develop` を長期ブランチにし、作業は `develop` から `<type>/<short-kebab-case>` を切る
   （type: feature / fix / hotfix / chore / refactor / docs / test）
 - 作業ブランチ → `develop` に squash merge。`develop` で動作確認してから、ユーザーに確認して `main` へ
-- リリース時は `main` と同じ内容で `release/v.x.y.z` を作って残す
+- このプロジェクトでは `release/v.x.y.z` ブランチは作らない（2026-10-08 ユーザー指示。学習用で配布しないため）
 - コミットメッセージは英語小文字の短文
