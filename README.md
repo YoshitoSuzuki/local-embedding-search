@@ -1,7 +1,7 @@
-# Local Semantic Search
+# local-embedding-search
 
 外部の AI API を一切使わず、**自分の PC の中だけで動く「意味で探す」検索サービス**のプロトタイプです。
-Embedding の仕組みを手を動かして理解するために作りました。
+Embedding の仕組みを手を動かして理解するために作りました（画面上の名前は「Local Semantic Search」）。
 
 本の説明文をあらかじめ Embedding（文章 → 数値ベクトル）しておき、ブラウザで入力した検索文も同じモデルで
 ベクトルにして、ベクトルどうしの近さ（コサイン類似度）で本を並べます。
@@ -11,6 +11,8 @@ Embedding の仕組みを手を動かして理解するために作りました�
 - Embedding モデル: `multilingual-e5-base`（ONNX 版）を **Node.js の中で直接実行**
 - データベース: SQLite（Node.js 標準の `node:sqlite`）
 - API キー不要。モデルをダウンロードしたあとはオフラインで動きます
+
+仕様書・設計判断・動作確認の手順・開発の経緯は [docs/](docs/) にあります（仕様書は [docs/spec.md](docs/spec.md)）。
 
 ## システム構成
 
@@ -58,8 +60,8 @@ brew install node
 node --version   # v24 以上であること
 
 # 取得してパッケージを入れる
-git clone <このリポジトリのURL> local-semantic-search
-cd local-semantic-search
+git clone <このリポジトリのURL> local-embedding-search
+cd local-embedding-search
 npm install
 
 # 1. モデルをダウンロード（約 290MB。インターネットを使うのはここだけ）
@@ -92,7 +94,7 @@ npm start
 ## ディレクトリ構成
 
 ```text
-local-semantic-search/
+local-embedding-search/
 ├── backend/            サーバー側（Node.js がこの .ts をそのまま実行する）
 │   ├── config.ts       モデル名・パスなどの設定
 │   ├── embedder.ts     文章 → ベクトル（ローカルのモデルを実行）

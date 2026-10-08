@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Embedding の仕組みを学ぶためのローカル意味検索のプロトタイプ。仕様は `spec.md`、使い方と仕組みは `README.md`。
+Embedding の仕組みを学ぶためのローカル意味検索のプロトタイプ。仕様は `docs/spec.md`、使い方は `README.md`、仕組み・経緯・確認手順は `docs/`。
 
 ## 構成の要点
 
