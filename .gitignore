@@ -1,0 +1,15 @@
+# Node.js のパッケージ（npm install で復元できる）
+node_modules/
+
+# frontend/src/app.ts から生成する JS（npm run build で再生成できる）
+frontend/dist/
+
+# ダウンロードした Embedding モデル本体（各自 npm run download-model で取得）
+models/*
+!models/.gitkeep
+
+# 生成されるデータベース（npm run build-index で再生成できる）
+data/*.db
+
+# macOS
+.DS_Store

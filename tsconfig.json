@@ -1,0 +1,18 @@
+{
+  // サーバー側（backend/, scripts/）の型チェック用。
+  // Node.js が .ts をそのまま実行するので、ここでは JS を出力しない（noEmit）
+  "compilerOptions": {
+    "target": "es2024",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "lib": ["es2024"],
+    "types": ["node"],
+    "strict": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true
+  },
+  "include": ["backend", "scripts"]
+}
