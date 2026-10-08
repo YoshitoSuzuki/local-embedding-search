@@ -129,7 +129,7 @@ button, input, textarea { font: inherit; color: inherit; }
   font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex: none;
 }
 .step-head .num.blue { background: var(--accent); }
-.step-head .name { font-weight: 600; }
+.step-head .name { font-weight: 600; white-space: nowrap; }
 .step-head .muted { margin-left: auto; }
 .step pre { padding: 10px 12px; background: var(--bg); border-radius: 10px; }
 .step dl { margin: 0; display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 4px 10px; font-size: 13px; }

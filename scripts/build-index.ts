@@ -22,14 +22,16 @@ for (const { title, description } of books) {
     skipped++;
     continue;
   }
-  const vector = await embedPassage(passageText(title, description));
+  // 冊数が多いので、Embedding の詳しいログは出さず1冊1行にまとめる
+  const vector = await embedPassage(passageText(title, description), false);
+  const head = Array.from(vector.slice(0, 3), (v) => v.toFixed(4)).join(", ");
   if (existing) {
     updateBook(db, existing.id, description, model, vector);
-    console.log(`[update] ${title}`);
+    console.log(`[update] ${title}  [${head}, ...]`);
     updated++;
   } else {
     insertBook(db, title, description, model, vector);
-    console.log(`[insert] ${title}`);
+    console.log(`[insert] ${title}  [${head}, ...]`);
     added++;
   }
 }

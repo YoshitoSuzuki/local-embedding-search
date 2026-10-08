@@ -14,6 +14,7 @@ type SearchResponse = {
     request: { query: string };
     embedding: { input: string; dimension: number; vector_head: number[]; ms: number };
     database: { sql: string; rows: number; reembedded: number };
+    ranking: { compared: number; limit: number };
   };
 };
 
@@ -123,7 +124,7 @@ async function runSearch(event?: SubmitEvent): Promise<void> {
   if (button) button.disabled = true;
   try {
     const data = await api<SearchResponse>("/api/search", { method: "POST", body: JSON.stringify({ query }) });
-    renderResults(data.results);
+    renderResults(data.results, data.trace.ranking.compared);
     renderSearchTrace(data.trace);
   } catch (err) {
     $("results").replaceChildren(el("div", { class: "empty", text: (err as Error).message }));
@@ -132,8 +133,8 @@ async function runSearch(event?: SubmitEvent): Promise<void> {
   }
 }
 
-function renderResults(results: SearchResult[]): void {
-  $("result-count").textContent = `${results.length}件`;
+function renderResults(results: SearchResult[], compared: number): void {
+  $("result-count").textContent = `上位 ${results.length} 件 / ${compared} 冊`;
   if (results.length === 0) {
     $("results").replaceChildren(el("div", { class: "empty", text: "該当なし" }));
     return;
@@ -165,7 +166,7 @@ function renderSearchTrace(t: SearchResponse["trace"]): void {
       ["出力", vectorHead(t.embedding.vector_head)],
     ])], true),
     step(3, "データベース", `${t.database.rows} 行 · 再Embedding ${t.database.reembedded}`, [pre(t.database.sql)]),
-    step(4, "コサイン類似度", "", [pre("query_vec · book_vec  （長さ 1 どうし）")]),
+    step(4, "コサイン類似度", `${t.ranking.compared} 冊 · 上位 ${t.ranking.limit}`, [pre("query_vec · book_vec  （長さ 1 どうし）")]),
   );
 }
 

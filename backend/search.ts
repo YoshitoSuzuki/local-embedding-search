@@ -19,8 +19,8 @@ export function dot(a: Float32Array, b: Float32Array): number {
   return sum;
 }
 
-// 保存済みの全行と検索ベクトルを比べ、類似度の高い順に返す
-export function rankBooks(queryVector: Float32Array, rows: BookRow[]): SearchResult[] {
+// 保存済みの全行と検索ベクトルを比べ、類似度の高い順に上位 limit 件を返す
+export function rankBooks(queryVector: Float32Array, rows: BookRow[], limit = Infinity): SearchResult[] {
   return rows
     .map((row) => ({
       id: row.id,
@@ -28,5 +28,6 @@ export function rankBooks(queryVector: Float32Array, rows: BookRow[]): SearchRes
       description: row.description,
       similarity: Math.round(dot(queryVector, blobToVector(row.embedding)) * 10000) / 10000,
     }))
-    .sort((a, b) => b.similarity - a.similarity);
+    .sort((a, b) => b.similarity - a.similarity)
+    .slice(0, limit);
 }

@@ -6,7 +6,7 @@ import { embedQuery } from "../backend/embedder.ts";
 import { rankBooks } from "../backend/search.ts";
 
 const query = process.argv[2] ?? "数学が得意な人が出てくるミステリー";
-const results = rankBooks(await embedQuery(query), allBooks(connect()));
+const results = rankBooks(await embedQuery(query), allBooks(connect()), 10);
 console.log(`検索文: ${query}\n`);
 results.forEach((r, i) => {
   console.log(`${i + 1}. ${r.title}  類似度: ${r.similarity.toFixed(4)}\n   ${r.description}`);

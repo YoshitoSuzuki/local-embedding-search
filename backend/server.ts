@@ -14,6 +14,9 @@ import { rankBooks } from "./search.ts";
 
 const MODEL_ID = `${MODEL_NAME}:${MODEL_DTYPE}`;
 
+// 検索結果として返す件数。比べるのは全冊、返すのは上位だけ
+const SEARCH_LIMIT = 10;
+
 const head = (vector: Float32Array, n = 4) => Array.from(vector.slice(0, n), (v) => Math.round(v * 10000) / 10000);
 
 async function timed<T>(fn: () => Promise<T>): Promise<[T, number]> {
@@ -64,8 +67,8 @@ app.post("/api/search", async (c) => {
   const [vector, ms] = await timed(() => embedQuery(query));
   // 2. 保存済みのベクトルを DB から読む（本の側は Embedding し直さない）
   const rows = withDb(db.allBooks);
-  // 3. 類似度を計算して並べる
-  const results = rankBooks(vector, rows);
+  // 3. 全冊と類似度を計算して並べ、上位だけを返す
+  const results = rankBooks(vector, rows, SEARCH_LIMIT);
   results.forEach((r, i) => console.log(`[Search] ${i + 1}. ${r.similarity.toFixed(4)}  ${r.title}`));
 
   return c.json({
@@ -78,6 +81,7 @@ app.post("/api/search", async (c) => {
         rows: rows.length,
         reembedded: 0,
       },
+      ranking: { compared: rows.length, limit: SEARCH_LIMIT },
     },
   });
 });
